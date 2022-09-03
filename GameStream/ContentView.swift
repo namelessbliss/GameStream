@@ -9,20 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            
-            Spacer()
-            
-            Color(red: 19/255, green: 30/255, blue: 53/255, opacity: 1.0).ignoresSafeArea()
-            
-            VStack{
-                HStack {
-                    Image("appLogoGame").resizable().aspectRatio(contentMode: .fit)
-                    Image("appLogo").resizable().aspectRatio(contentMode: .fit)
-                }.frame(width: 250, height: 20).padding(.bottom, 42)
+        NavigationView {
+            ZStack {
                 
-                InicioYRegistroview()
+                Spacer()
+                
+                Color(red: 19/255, green: 30/255, blue: 53/255, opacity: 1.0).ignoresSafeArea()
+                
+                VStack{
+                    HStack {
+                        Image("appLogoGame").resizable().aspectRatio(contentMode: .fit)
+                        Image("appLogo").resizable().aspectRatio(contentMode: .fit)
+                    }.frame(width: 250, height: 20).padding(.bottom, 42)
+                    
+                    InicioYRegistroview()
+                }
             }
+            .navigationBarHidden(true)
         }
     }
 }
@@ -72,7 +75,7 @@ struct InicioSesionView: View {
     
     @State var correo = ""
     @State var contraseña = ""
-    
+    @State var isPantallaHomeActive = false
     
     var body: some View{
         
@@ -140,12 +143,21 @@ struct InicioSesionView: View {
                 
                 
             }.padding(.horizontal, 77)
+            
+            NavigationLink(
+                destination: Home(),
+                isActive: $isPantallaHomeActive,
+                label: {
+                    EmptyView()
+                })
         }
     }
-}
-
-func iniciarSesion() {
-    print("Iniciando sesion")
+    
+    func iniciarSesion() {
+        print("Iniciando sesion")
+        
+        isPantallaHomeActive = true
+    }
 }
 
 struct RegistroView: View {
