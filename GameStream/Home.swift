@@ -26,7 +26,7 @@ struct Home: View {
                     Text("Juegos")
                 }.tag(1)
             
-            Text("Pantalla Inicio").font(.system(size: 30, weight: .bold, design: .rounded))
+            PantallaHome()
                 .tabItem{
                     Image(systemName: "house")
                     Text("Inicio")
@@ -38,6 +38,60 @@ struct Home: View {
                     Text("Favoritos")
                 }.tag(3)
         }
+        .accentColor(.white)
+    }
+    
+    init(){
+        UITabBar
+            .appearance()
+            .barTintColor = UIColor(Color("TabBar-Color"))
+        UITabBar.appearance().isTranslucent = true
+        
+        print("Inicionado las vistas de home")
+    }
+}
+
+struct PantallaHome:View{
+    
+    @State var textoBusqueda = ""
+    
+    var  body: some View{
+        
+        ZStack {
+            Color("Marine").ignoresSafeArea()
+            VStack {
+                
+                HStack {
+                    Image("appLogoGame").resizable().aspectRatio(contentMode: .fit)
+                    Image("appLogo").resizable().aspectRatio(contentMode: .fit)
+                }.frame(width: 250, height: 20).padding(.horizontal, 11)
+                
+                HStack{
+                    Button(action: busqueda, label: {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(textoBusqueda.isEmpty ? Color(.yellow) : Color("Dark-Cian"))
+                    })
+                    
+                    ZStack(alignment: .leading){
+                        
+                        if textoBusqueda.isEmpty{
+                            Text("Buscar un video").foregroundColor(Color(red: 174/255, green: 177/255, blue: 185/255, opacity: 1.0))
+                        }
+                        
+                        TextField("", text: $textoBusqueda)
+                            .foregroundColor(.white)
+                    }
+                }.padding([.top, .leading, .bottom], 11.0)
+                    .background(Color("Blue-Gray"))
+                    .clipShape(Capsule())
+                
+            }.padding(.horizontal, 18)
+        }.navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+    }
+    
+    func busqueda(){
+        print("El usuario esta buscando \(textoBusqueda)")
     }
 }
 
