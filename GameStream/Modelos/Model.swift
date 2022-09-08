@@ -13,11 +13,11 @@ struct Games:Codable {
     
 }
 
-struct Game:Codable{
+struct Game:Codable, Hashable {
     
     var title:String
     var studio:String
-    var contentRating:String
+    var contentRaiting:String
     var publicationYear:String
     var description:String
     var platforms:[String]
@@ -27,7 +27,7 @@ struct Game:Codable{
     
 }
 
-struct videoUrl:Codable{
+struct videoUrl:Codable, Hashable {
     
     var mobile:String
     var tablet:String

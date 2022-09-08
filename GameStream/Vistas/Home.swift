@@ -84,7 +84,9 @@ struct PantallaHome:View{
                     .clipShape(Capsule())
                 
                 ScrollView(showsIndicators: false){
+                    
                 SubModuloHome()
+                    
                 }
                 
             }.padding(.horizontal, 18)
