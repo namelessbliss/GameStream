@@ -41,6 +41,12 @@ struct GameView: View {
                     .padding(.bottom)
                     
                     Gallery(imgsUrl: imgsUrl)
+                        .padding(.bottom)
+                    
+                    
+                    Comentarios()
+                        .padding(.bottom)
+                    
                     
                 }.frame(maxWidth: .infinity)
             }
@@ -135,7 +141,7 @@ struct Gallery:View{
             
             Text("GALERÍA")
                 .foregroundColor(.white)
-                .font(.largeTitle)
+                .font(.title2)
                 .padding(.leading)
             
             ScrollView(.horizontal){
@@ -162,6 +168,63 @@ struct Gallery:View{
     }
 }
 
+struct Comentarios:View{
+    
+    var body: some View{
+        
+        VStack (alignment: .leading){
+            
+            Text("Comentarios")
+                .foregroundColor(.white)
+                .font(.title2)
+                .padding(.leading)
+            
+        }.frame(maxWidth: .infinity, alignment: .leading)
+        
+        ComentariosItems()
+        ComentariosItems()
+        
+    }
+}
+
+struct ComentariosItems:View{
+    var body: some View{
+        
+        VStack (alignment: .leading){
+            
+            VStack{
+                
+            HStack{
+                
+                Image("perfilEjemplo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 60, height: 60)
+                
+                VStack {
+                    
+                    Text("Geoff Atto")
+                        .foregroundColor(.white)
+                        .bold()
+                        .font(.title3)
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                    
+                    Text("Hace 7 días")
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                }
+            }
+            
+            Text("He visto que como media tiene una gran calificación, y estoy completamente de acuerdo. Es el mejor juego que he jugado sin ninguna duda, combina una buena trama con una buenísima experiencia de juego libre gracias a su inmmenso mapa y actividades.")
+                    .foregroundColor(.white)
+            }.padding(18)
+                .background(Color("Blue-Gray"))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        }.frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal,18)
+    }
+}
+
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView(url: "ejemplo",titulo:"Sonic The Hedgehog",
@@ -171,6 +234,6 @@ struct GameView_Previews: PreviewProvider {
                  descripcion: "Juego de Sega Genesis publicado en 1991 con más de 40 millones de copias vendidas actualmente",
                  tags:["plataformas","mascota"],
                  imgsUrl: [ "https://cdn.cloudflare.steamstatic.com/steam/apps/268910/ss_615455299355eaf552c638c7ea5b24a8b46e02dd.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/268910/ss_615455299355eaf552c638c7ea5b24a8b46e02dd.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/268910/ss_615455299355eaf552c638c7ea5b24a8b46e02dd.600x338.jpg"
-             ])
+                          ])
     }
 }
