@@ -54,8 +54,6 @@ struct Home: View {
 
 struct PantallaHome:View{
     
-    @State var textoBusqueda = ""
-    
     var  body: some View{
         
         ZStack {
@@ -64,24 +62,7 @@ struct PantallaHome:View{
                 
                 Image("AppLogoGame").resizable().aspectRatio(contentMode: .fit).frame(width: 250).padding(.vertical, 11.0)
                 
-                HStack{
-                    Button(action: busqueda, label: {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(textoBusqueda.isEmpty ? Color(.yellow) : Color("Dark-Cian"))
-                    })
-                    
-                    ZStack(alignment: .leading){
-                        
-                        if textoBusqueda.isEmpty{
-                            Text("Buscar un video").foregroundColor(Color(red: 174/255, green: 177/255, blue: 185/255, opacity: 1.0))
-                        }
-                        
-                        TextField("", text: $textoBusqueda)
-                            .foregroundColor(.white)
-                    }
-                }.padding([.top, .leading, .bottom], 11.0)
-                    .background(Color("Blue-Gray"))
-                    .clipShape(Capsule())
+
                 
                 ScrollView(showsIndicators: false){
                     
@@ -95,12 +76,15 @@ struct PantallaHome:View{
             .navigationBarBackButtonHidden(true)
     }
     
-    func busqueda(){
+    /*func busqueda(){
         print("El usuario esta buscando \(textoBusqueda)")
-    }
+    }*/
 }
 
 struct SubModuloHome:View{
+    
+    @State var textoBusqueda = ""
+    @State var isGameInfoEmpty = false
     
     @State var url = "https://cdn.cloudflare.steamstatic.com/steam/apps/256658589/movie480.mp4"
     @State var isPlayerActive = false
@@ -108,7 +92,40 @@ struct SubModuloHome:View{
     
     var body: some View{
         
+        
         VStack {
+            
+            HStack{
+                Button(action: {
+                    
+                    watchGame(name: textoBusqueda)
+                    
+                    
+                    
+                } , label: {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(textoBusqueda.isEmpty ? Color(.yellow) : Color("Dark-Cian"))
+                }).alert(isPresented: $isGameInfoEmpty){
+                    
+                    Alert(title: Text("Error"),
+                          message: Text("No se encontro el juego"),
+                          dismissButton: .default(Text("Entendido")))
+                    
+                }
+                
+                ZStack(alignment: .leading){
+                    
+                    if textoBusqueda.isEmpty{
+                        Text("Buscar un video").foregroundColor(Color(red: 174/255, green: 177/255, blue: 185/255, opacity: 1.0))
+                    }
+                    
+                    TextField("", text: $textoBusqueda)
+                        .foregroundColor(.white)
+                }
+            }.padding([.top, .leading, .bottom], 11.0)
+                .background(Color("Blue-Gray"))
+                .clipShape(Capsule())
+            
             Text("LOS MÁS POPULARES")
                 .font(.title3)
                 .foregroundColor(.white)
@@ -261,6 +278,13 @@ struct SubModuloHome:View{
                        label: {
             EmptyView()
         })
+    }
+    
+    func watchGame(name: String) {
+        
+        print("Buscar Juego")
+        isGameInfoEmpty = true
+        
     }
 }
 
