@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     
     @State var nombreUsuario = "Adolfo"
+    @State var imagenPerfil: UIImage = UIImage(named: "perfilEjemplo")!
     
     var body: some View {
         
@@ -29,7 +30,7 @@ struct ProfileView: View {
                 
                 VStack{
                     
-                    Image("perfilEjemplo").resizable()
+                    Image(uiImage: imagenPerfil).resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 118.0, height: 118.0)
                         .clipShape(Circle())
@@ -56,10 +57,42 @@ struct ProfileView: View {
         }.onAppear(
             
             perform: {
+                
+                //Metodo de recuperación de imagenes
+                
+                if returnUiImage(named: "fotoperfil") != nil{
+                    
+                    imagenPerfil = returnUiImage(named: "fotoperfil")!
+                    
+                }else{
+                    print("No encontre foto de perfil guardada en el dispositivo")
+                }
+                
                 print("Revisando si tengo datos de usuario en mis UserDefaults")
+                
+                if UserDefaults.standard.object(forKey: "datosUsuario") != nil {
+                    
+                    nombreUsuario = UserDefaults.standard.stringArray(forKey: "datosUsuario")![2]
+                    
+                    print("Si encontre nombre de usuario \(nombreUsuario)")
+                    
+                }else{
+                    print("No encontró nombre de usuario guardado en objeto global de userdefaults")
+                }
             }
             
         )
+    }
+    
+    func returnUiImage(named:String) -> UIImage? {
+        
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false){
+            
+            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
+            
+        }
+        
+        return nil
     }
     
 }
