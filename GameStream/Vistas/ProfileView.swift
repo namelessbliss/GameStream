@@ -59,9 +59,83 @@ struct ProfileView: View {
 }
 
 struct ModuloAjustes: View {
+    
+    @State var isToggleOn = true
+    @State var isEditProfileViewActive = false
+    
     var body: some View{
         
-        Text("Hola")
+        VStack (spacing: 3.0){
+            
+            Button(action: {}, label: {
+                
+                HStack {
+                    
+                    Text("Cuenta").foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    Text(">").foregroundColor(.white)
+                    
+                }.padding()
+                
+            })
+            .background(Color("Blue-Gray"))
+            .clipShape(RoundedRectangle(cornerRadius: 1.0))
+            
+            Button(action: {}, label: {
+                
+                HStack {
+                    
+                    Text("Notificaciones").foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    Toggle("", isOn: $isToggleOn)
+                    
+                }.padding()
+                
+            })
+            .background(Color("Blue-Gray"))
+            .clipShape(RoundedRectangle(cornerRadius: 1.0))
+            
+            Button(action: {isEditProfileViewActive = true}, label: {
+                
+                HStack {
+                    
+                    Text("Editar Perfil").foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    Text(">").foregroundColor(.white)
+                    
+                }.padding()
+                
+            })
+            .background(Color("Blue-Gray"))
+            .clipShape(RoundedRectangle(cornerRadius: 1.0))
+            
+            Button(action: {}, label: {
+                
+                HStack {
+                    
+                    Text("Califica esta aplicación").foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    Text(">").foregroundColor(.white)
+                    
+                }.padding()
+                
+            })
+            .background(Color("Blue-Gray"))
+            .clipShape(RoundedRectangle(cornerRadius: 1.0))
+            
+            NavigationLink(destination: EditProfileView(), isActive: $isEditProfileViewActive, label: {
+                EmptyView()
+            })
+            
+        }
         
     }
 }
