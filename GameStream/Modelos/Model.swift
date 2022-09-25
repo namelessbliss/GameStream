@@ -13,6 +13,11 @@ struct Games:Codable {
     
 }
 
+struct Resultados:Codable {
+    
+    var results:[Game]  
+}
+
 struct Game:Codable, Hashable {
     
     var title:String
