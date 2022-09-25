@@ -18,6 +18,8 @@ struct EditProfileView: View {
                 VStack{
                     
                     Text("Editar Perfil")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
                     
                     Button(action: {}, label: {
                         
@@ -64,7 +66,7 @@ struct ModuloEditar:View {
                     
                     Text("ejmplo@icloud.com")
                         .font(.caption)
-                        .foregroundColor(Color(red: 174/255, green: 117/255, blue: 185/255, opacity: 1.0))
+                        .foregroundColor(Color(.white))
                     
                 }
                 
@@ -75,6 +77,7 @@ struct ModuloEditar:View {
             
             Divider().frame(height: 1.0)
                 .background(Color("Dark-Cian"))
+                .padding(.bottom)
             
             
             Text("Contraseña")
@@ -86,7 +89,7 @@ struct ModuloEditar:View {
                     
                     Text("Introduce tu contraseña")
                         .font(.caption)
-                        .foregroundColor(Color(red: 174/255, green: 117/255, blue: 185/255, opacity: 1.0))
+                        .foregroundColor(Color(.white))
                     
                 }
                 
@@ -96,7 +99,8 @@ struct ModuloEditar:View {
             }
             
             Divider().frame(height: 1.0)
-                .background(Color("Dark-Cian"))
+                .background(Color(.white))
+                .padding(.bottom)
             
             
             Text("Nombre")
@@ -108,7 +112,7 @@ struct ModuloEditar:View {
                     
                     Text("Introduce tu nombre de usuario")
                         .font(.caption)
-                        .foregroundColor(Color(red: 174/255, green: 117/255, blue: 185/255, opacity: 1.0))
+                        .foregroundColor(Color(.white))
                     
                 }
                 
@@ -118,7 +122,7 @@ struct ModuloEditar:View {
             }
             
             Divider().frame(height: 1.0)
-                .background(Color("Dark-Cian"))
+                .background(Color(.white))
                 .padding(.bottom, 32)
             
             
@@ -140,7 +144,12 @@ struct ModuloEditar:View {
     }
     
     func actualizarDatos() {
-        print("Guardando y recuperando datos del usuario")
+        
+        let objetoActualizadorDatos = SaveData()
+        
+        let resultado = objetoActualizadorDatos.guardarDatos(correo: correo, contraseña: contraseña, nombre: nombre)
+        
+        print("Se guardaron los datos con exito? \(resultado)")
     }
 }
 
